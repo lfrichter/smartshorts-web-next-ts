@@ -1,8 +1,9 @@
 // src/components/JobList.jsx
 
+import { Job } from "@/types";
 import JobListItem from './JobListItem';
 
-function JobList({ jobs }) {
+function JobList({ jobs }: { jobs: Job[] }) {
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4">Fila de Processamento</h2>

@@ -67,17 +67,17 @@ Version: "1.0"
 
 #### **Fase 2: Lógica de Cliente com Tipagem**
 
-  * `[ ]` **1. Implementar Tipagem no Estado (`useState`)**
+  * `[x]` **1. Implementar Tipagem no Estado (`useState`)**
 
-      * `[ ]` Usar tipos genéricos no `useState` para estados complexos.
+      * `[x]` Usar tipos genéricos no `useState` para estados complexos.
         ```typescript
         import { Job } from '@/types';
         const [jobs, setJobs] = useState<Job[]>([]);
         ```
 
-  * `[ ]` **2. Tipar Hooks Customizados**
+  * `[x]` **2. Tipar Hooks Customizados**
 
-      * `[ ]` Adicionar tipos para os parâmetros do hook `useJobPolling`.
+      * `[x]` Adicionar tipos para os parâmetros do hook `useJobPolling`.
         ```typescript
         import { Job } from '@/types';
 

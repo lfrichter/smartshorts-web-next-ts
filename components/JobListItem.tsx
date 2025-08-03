@@ -1,8 +1,9 @@
 // src/components/JobListItem.jsx
 
+import { Job } from "@/types";
 import { useEffect, useState } from 'react';
 
-function JobListItem({ job }) {
+function JobListItem({ job }: { job: Job }) {
   const [copied, setCopied] = useState(false);
 
   const statusConfig = {

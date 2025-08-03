@@ -2,7 +2,11 @@ import { useState } from 'react';
 import { createJobFromJsonUpload, createJobFromPrompt } from '../services/apiService';
 import Spinner from './Spinner';
 
-function JobCreator({ onJobCreated }) {
+interface JobCreatorProps {
+  onJobCreated: (jobId: string) => void;
+}
+
+function JobCreator({ onJobCreated }: JobCreatorProps) {
   const [mode, setMode] = useState('prompt');
   const [prompt, setPrompt] = useState('');
   const [jsonData, setJsonData] = useState('');
@@ -139,83 +143,3 @@ function JobCreator({ onJobCreated }) {
 }
 
 export default JobCreator;
-
-
-//   const handleJsonSubmit = async (event) => {
-//     event.preventDefault();
-//     if (!jsonData.trim()) return;
-//     setIsLoading(true);
-//     setError('');
-//     try {
-//       const parsedData = JSON.parse(jsonData);
-//       const response = await createJobFromJsonUpload(parsedData);
-//       onJobCreated(response.jobId);
-//       setJsonData('');
-//     } catch (err) {
-//       if (err instanceof SyntaxError) {
-//         setError('O JSON fornecido é inválido.');
-//       } else {
-//         setError('Falha ao criar o job. Verifique o JSON e tente novamente.');
-//       }
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-  // return (
-  //   <div className="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
-  //     <div className="flex mb-4 border-b border-gray-700">
-  //       <button onClick={() => setMode('prompt')} className={`py-2 px-4 rounded-t-lg font-semibold ${mode === 'prompt' ? activeClasses : inactiveClasses}`}>
-  //         Criar por Prompt
-  //       </button>
-  //       <button onClick={() => setMode('json')} className={`py-2 px-4 rounded-t-lg font-semibold ${mode === 'json' ? activeClasses : inactiveClasses}`}>
-  //         Criar por JSON
-  //       </button>
-  //     </div>
-
-  //     {error && <p className="text-red-400 mb-4">{error}</p>}
-
-  //     {mode === 'prompt' && (
-  //       <form onSubmit={handlePromptSubmit}>
-  //         <div className="mb-4">
-  //           <label htmlFor="prompt" className="block text-sm font-medium text-gray-300 mb-2">Seu Prompt de Comando</label>
-  //           <input
-  //             type="text"
-  //             id="prompt"
-  //             value={prompt}
-  //             onChange={(e) => setPrompt(e.target.value)}
-  //             placeholder="Uma história sobre a amizade entre um robô e um esquilo."
-  //             className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500"
-  //             disabled={isLoading}
-  //           />
-  //         </div>
-  //         <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex justify-center items-center disabled:bg-gray-500" disabled={isLoading}>
-  //           {isLoading ? <Spinner /> : 'Gerar Vídeo'}
-  //         </button>
-  //       </form>
-  //     )}
-
-  //     {mode === 'json' && (
-  //       <form onSubmit={handleJsonSubmit}>
-  //         <div className="mb-4">
-  //           <label htmlFor="jsonData" className="block text-sm font-medium text-gray-300 mb-2">Cole seu Roteiro JSON</label>
-  //           <textarea
-  //             id="jsonData"
-  //             rows="10"
-  //             value={jsonData}
-  //             onChange={(e) => setJsonData(e.target.value)}
-  //             placeholder='Cole o conteúdo JSON aqui...'
-  //             className="w-full bg-gray-900 border border-gray-700 rounded-lg px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 font-mono text-sm"
-  //             disabled={isLoading}
-  //           ></textarea>
-  //         </div>
-  //         <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg flex justify-center items-center disabled:bg-gray-500" disabled={isLoading}>
-  //           {isLoading ? <Spinner /> : 'Gerar Vídeo por JSON'}
-  //         </button>
-  //       </form>
-  //     )}
-  //   </div>
-  // );
-// }
-
-// export default JobCreator;
