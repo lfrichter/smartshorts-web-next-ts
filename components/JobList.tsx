@@ -3,7 +3,7 @@
 import { Job } from "@/types";
 import JobListItem from './JobListItem';
 
-function JobList({ jobs }: { jobs: Job[] }) {
+function JobList({ jobs, onJobClick }: { jobs: Job[], onJobClick: (job: Job) => void }) {
   return (
     <div className="bg-gray-800 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4">Fila de Processamento</h2>
@@ -17,7 +17,7 @@ function JobList({ jobs }: { jobs: Job[] }) {
       <div className="space-y-4">
         {jobs.length > 0 ? (
           jobs.map(job => (
-            <JobListItem key={job.jobId} job={job} />
+            <JobListItem key={job.jobId} job={job} onJobClick={onJobClick} />
           ))
         ) : (
           <p className="text-gray-500">Nenhum job em processamento.</p>

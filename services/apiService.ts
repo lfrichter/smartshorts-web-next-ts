@@ -1,5 +1,5 @@
 // services/apiService.ts
-import { Job, JobCreationResponse } from '@/types';
+import { Job, JobCreationResponse, JobUploadPayload } from '@/types';
 import axios from 'axios';
 
 const api = axios.create({
@@ -24,7 +24,7 @@ export const createJobFromPrompt = async (prompt: string): Promise<JobCreationRe
   return response.data;
 };
 
-export const createJobFromJsonUpload = async (jsonData: any): Promise<JobCreationResponse> => {
+export const createJobFromJsonUpload = async (jsonData: JobUploadPayload): Promise<JobCreationResponse> => {
   const response = await api.post('/jobs/upload', jsonData);
   return response.data;
 };
@@ -32,4 +32,19 @@ export const createJobFromJsonUpload = async (jsonData: any): Promise<JobCreatio
 export const getJobStatus = async (jobId: string): Promise<Job> => {
   const response = await api.get(`/jobs/${jobId}`);
   return response.data;
+};
+
+/**
+ * Busca todos os jobs de renderização existentes.
+ * Corresponde ao endpoint GET /jobs
+ * @returns {Promise<Job[]>} Uma lista de jobs.
+ */
+export const getAllJobs = async (): Promise<Job[]> => {
+  try {
+    const response = await api.get('/jobs');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar todos os jobs:', error);
+    throw error;
+  }
 };

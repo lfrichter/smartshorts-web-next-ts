@@ -3,7 +3,7 @@
 import { Job } from "@/types";
 import { useEffect, useState } from 'react';
 
-function JobListItem({ job }: { job: Job }) {
+function JobListItem({ job, onJobClick }: { job: Job, onJobClick: (job: Job) => void }) {
   const [copied, setCopied] = useState(false);
 
   const statusConfig = {
@@ -51,7 +51,8 @@ function JobListItem({ job }: { job: Job }) {
         >
           {copied ? 'Copiado!' : 'Copiar ID'}
         </button>
-        <button className="text-gray-400 hover:text-gray-300 text-sm">
+        <button className="text-gray-400 hover:text-gray-300 text-sm"
+          onClick={() => onJobClick(job)}>
           Detalhes
         </button>
       </div>
