@@ -4,18 +4,15 @@
 
 import Spinner from '@/components/Spinner';
 import Link from 'next/link'; // 2. Importa o Link do Next.js, não do react-router-dom
+import { useRouter } from 'next/navigation'; // 3. Importa o useRouter do Next.js
 import { useState } from 'react';
 
-// 3. Define a interface para as props do componente
-interface LoginProps {
-  onLoginSuccess: () => void;
-}
-
-export default function Login({ onLoginSuccess }: LoginProps) {
+export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -37,9 +34,8 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         throw new Error(data.error || 'Credenciais inválidas');
       }
 
-      // Se o login for bem-sucedido, a API do Next.js já configurou o cookie.
-      // Apenas notificamos o componente pai para atualizar a UI.
-      onLoginSuccess();
+      router.push('/'); // Redireciona para a página inicial após o login bem-sucedido
+
     } catch (err: any) {
       setError(err.message);
     } finally {
