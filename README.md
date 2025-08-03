@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SmartShorts UI - Interface com Next.js
 
-## Getting Started
+## 📝 Descrição
 
-First, run the development server:
+Este projeto é a interface de usuário (UI) para o **SmartShorts**, um SaaS de geração automatizada de vídeos. Desenvolvido com o framework **Next.js** e **TypeScript**, esta aplicação permite que os usuários se autentiquem e interajam com a API de backend do SmartShorts para criar e monitorar jobs de geração de vídeo.
+
+A UI foi projetada para ser intuitiva, performática e eficiente, permitindo a criação de vídeos a partir de prompts de texto simples ou de estruturas JSON detalhadas, além de oferecer um painel para acompanhar o status de cada job de renderização em tempo real.
+
+## ✨ Tecnologias Utilizadas
+
+  * **Next.js**: Framework React para produção, com renderização híbrida (Server-Side e Client-Side) e foco em performance.
+  * **React**: Biblioteca JavaScript para construção de interfaces de usuário reativas.
+  * **TypeScript**: Superset do JavaScript que adiciona tipagem estática para maior segurança e clareza do código.
+  * **Tailwind CSS**: Framework CSS utilitário para estilização rápida e responsiva.
+  * **Axios**: Cliente HTTP baseado em Promises para fazer requisições à API.
+
+## 🚀 Como Executar o Projeto
+
+Para colocar o projeto SmartShorts UI em funcionamento na sua máquina local, siga os passos abaixo.
+
+### Pré-requisitos
+
+Certifique-se de ter os seguintes softwares instalados:
+
+  * [Node.js](https://nodejs.org/en/) (versão 18 ou superior).
+  * [npm](https://www.npmjs.com/) (gerenciador de pacotes do Node.js) ou [Yarn](https://yarnpkg.com/).
+  * O backend do SmartShorts (Java/Spring Boot) deve estar em execução e acessível em `http://localhost:8080`.
+
+### Instalação e Execução
+
+1.  **Clone o repositório** (se ainda não o fez):
+
+    ```bash
+    git clone <URL_DO_SEU_REPOSITORIO>
+    cd smartshorts-ui-next
+    ```
+
+2.  **Instale as dependências**:
+
+    ```bash
+    npm install
+    ```
+
+3.  **Inicie o servidor de desenvolvimento**:
+
+    ```bash
+    npm run dev
+    ```
+
+    O aplicativo estará disponível em `http://localhost:3000`.
+
+## 📊 Endpoints da API Consumidos
+
+A interface interage com os seguintes endpoints da API de backend, que está configurada com uma `baseURL` de `http://localhost:8080/api/v1`:
+
+| Endpoint         | Método HTTP | Descrição                                                |
+| :--------------- | :---------- | :------------------------------------------------------- |
+| `/auth/register` | `POST`      | Registra um novo usuário no sistema.                     |
+| `/auth/login`    | `POST`      | Autentica um usuário e retorna um token JWT.             |
+| `/jobs/prompt`   | `POST`      | Cria um novo `RenderJob` a partir de um prompt de texto. |
+| `/jobs/upload`   | `POST`      | Cria um novo `RenderJob` a partir de uma estrutura JSON. |
+| `/jobs/{jobId}`  | `GET`       | Consulta o status atual de um `RenderJob` específico.    |
+
+## 📐 Estrutura do Projeto
+
+A estrutura de pastas segue o padrão do **App Router** do Next.js:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+.
+├── app/
+│   ├── api/             # Route Handlers (nossa API de proxy)
+│   │   └── auth/
+│   ├── login/           # Rota /login
+│   │   └── page.tsx
+│   ├── register/        # Rota /register
+│   │   └── page.tsx
+│   ├── layout.tsx       # Layout raiz da aplicação
+│   └── page.tsx         # Página principal (dashboard)
+├── components/          # Componentes reutilizáveis (e.g., JobCreator)
+├── hooks/               # Hooks customizados (e.g., useJobPolling)
+├── services/            # Lógica de comunicação com a API (apiService.js)
+├── types/               # Definições de tipos TypeScript
+└── middleware.ts        # Middleware para proteção de rotas
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛣️ Plano de Migração
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Este projeto é o resultado de uma migração de uma SPA React/Vite para Next.js/TypeScript. O plano de desenvolvimento detalhado para esta migração pode ser encontrado em `docs/ImplementationPlanV1.md`. As principais fases foram:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  * **Fase 0: Configuração e Base do Projeto**: Inicialização do projeto Next.js com TypeScript.
+  * **Fase 1: Migração da UI e Estrutura de Rotas**: Adaptação dos componentes e uso do App Router.
+  * **Fase 2: Re-arquitetura da Autenticação**: Implementação de autenticação server-side com cookies e middleware.
+  * **Fase 3: Migração da Lógica Principal**: Adaptação dos componentes interativos e hooks.
 
-## Learn More
+## 🤝 Contribuição
 
-To learn more about Next.js, take a look at the following resources:
+Contribuições são muito bem-vindas\! Antes de contribuir, por favor, leia nossas diretrizes detalhadas no arquivo `docs/CONTRIBUTING.md`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📄 Licença
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto é licenciado sob a licença MIT.
