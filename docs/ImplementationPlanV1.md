@@ -88,9 +88,9 @@ Version: "1.0"
 
 #### **Fase 3: Autenticação Segura com TypeScript**
 
-  * `[ ]` **1. Criar Route Handlers Tipados para Autenticação**
+  * `[x]` **1. Criar Route Handlers Tipados para Autenticação**
 
-      * `[ ]` Implementar os arquivos `app/api/auth/[...]/route.ts` usando os tipos `Request` e `NextResponse`.
+      * `[x]` Implementar os arquivos `app/api/auth/[...]/route.ts` usando os tipos `Request` e `NextResponse`.
         ```typescript
         import { NextResponse } from 'next/server';
 
