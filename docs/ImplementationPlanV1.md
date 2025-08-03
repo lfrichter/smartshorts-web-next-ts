@@ -99,9 +99,9 @@ Version: "1.0"
         }
         ```
 
-  * `[ ]` **2. Implementar o Middleware de Autenticação Tipado**
+  * `[x]` **2. Implementar o Middleware de Autenticação Tipado**
 
-      * `[ ]` Criar o arquivo `middleware.ts` na raiz do projeto com a lógica de verificação de cookie e redirecionamento, utilizando os tipos `NextRequest` e `NextResponse`.
+      * `[x]` Criar o arquivo `middleware.ts` na raiz do projeto com a lógica de verificação de cookie e redirecionamento, utilizando os tipos `NextRequest` e `NextResponse`.
         ```typescript
         import { NextResponse } from 'next/server'
         import type { NextRequest } from 'next/server'
