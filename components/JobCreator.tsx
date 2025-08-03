@@ -1,5 +1,6 @@
+import { createJobFromJsonUpload, createJobFromPrompt } from '@/services/apiService';
+import { OldData, OldSegment } from '@/types';
 import { useState } from 'react';
-import { createJobFromJsonUpload, createJobFromPrompt } from '../services/apiService';
 import Spinner from './Spinner';
 
 interface JobCreatorProps {
@@ -16,7 +17,7 @@ function JobCreator({ onJobCreated }: JobCreatorProps) {
   const activeClasses = 'bg-indigo-600 text-white';
   const inactiveClasses = 'bg-gray-700 hover:bg-gray-600';
 
-  const handlePromptSubmit = async (event) => {
+  const handlePromptSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!prompt.trim()) return;
     setIsLoading(true);
@@ -32,7 +33,7 @@ function JobCreator({ onJobCreated }: JobCreatorProps) {
     }
   };
 
-  const handleJsonSubmit = async (event) => {
+  const handleJsonSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!jsonData.trim()) return;
     setIsLoading(true);
@@ -42,25 +43,21 @@ function JobCreator({ onJobCreated }: JobCreatorProps) {
       const rawData = JSON.parse(jsonData);
       let payload;
 
-      // CORREÇÃO 1: Mudar a forma de detectar o formato antigo.
-      // Em vez de checar por 'content', checamos por 'prompt_phrase'.
       if (rawData.prompt_phrase) {
-        console.log("Detectado formato antigo (pela chave 'prompt_phrase'). Transformando para o novo formato...");
+        console.log("Detectado formato antigo. Transformando...");
+        const oldData: OldData = rawData; // Diz ao TS que rawData tem o formato antigo
 
-        // CORREÇÃO 2: Usar 'rawData' diretamente, pois não há o aninhamento 'content'.
-        const oldData = rawData;
-
-        // O mapeamento continua o mesmo, pois é a lógica de tradução correta.
         payload = {
           title: oldData.prompt_phrase,
           fullText: oldData.speech,
           durationSeconds: oldData.duration_seconds,
-          segments: oldData.segments.map(seg => ({
+          // Agora, 'seg' é corretamente tipado como OldSegment!
+          segments: oldData.segments.map((seg: OldSegment) => ({
             order: seg.segment_id,
             timeBegin: seg.time_begin,
             timeEnd: seg.time_end,
             subtitle: seg.subtitle,
-            imagePrompt: seg.prompt_imagem, // <-- Corrigido o nome da chave aqui também
+            imagePrompt: seg.prompt_image,
             movement: seg.movement ? seg.movement.toUpperCase() : 'ZOOM_IN_CENTER',
             verticalOffset: seg.vertical_offset || 0.5
           }))
@@ -125,7 +122,7 @@ function JobCreator({ onJobCreated }: JobCreatorProps) {
             <label htmlFor="jsonData" className="block text-sm font-medium text-gray-300 mb-2">Cole seu Roteiro JSON</label>
             <textarea
               id="jsonData"
-              rows="10"
+              rows={10}
               value={jsonData}
               onChange={(e) => setJsonData(e.target.value)}
               placeholder='Cole o conteúdo JSON aqui...'

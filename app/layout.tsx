@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./globals.css"; // Importando nosso CSS com Tailwind
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SmartShorts Video Factory",
@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-br">
+    <html lang="en">
       <body>{children}</body>
     </html>
   );

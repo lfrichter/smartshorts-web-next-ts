@@ -11,6 +11,8 @@ function JobListItem({ job }: { job: Job }) {
     PROCESSING: { text: 'Processando', className: 'bg-blue-500' },
     COMPLETED: { text: 'Concluído', className: 'bg-green-500' },
     FAILED: { text: 'Falhou', className: 'bg-red-500' },
+    SCHEDULED: { text: 'Agendado', className: 'bg-cyan-500' },
+    PUBLISHED: { text: 'Publicado', className: 'bg-purple-500' },
     UNKNOWN: { text: 'Desconhecido', className: 'bg-gray-500' }
   };
 

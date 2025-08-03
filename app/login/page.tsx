@@ -97,7 +97,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         </form>
         <p className="text-sm text-center text-gray-400">
           Não tem uma conta?{' '}
-          <Link to="/register" className="font-medium text-indigo-400 hover:underline">
+          <Link href="/register" className="font-medium text-indigo-400 hover:underline">
             Registre-se
           </Link>
         </p>

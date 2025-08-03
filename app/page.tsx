@@ -1,21 +1,20 @@
 // app/page.tsx
 
-"use client"; // Esta página é interativa, então é um Componente de Cliente
+"use client";
 
 import JobCreator from "@/components/JobCreator";
 import JobList from "@/components/JobList";
 import useJobPolling from "@/hooks/useJobPolling";
-import { Job } from "@/types"; // Importando o tipo Job
+import { logout } from "@/services/apiService";
+import { Job } from "@/types";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function DashboardPage() {
-  // O estado 'jobs' agora é estritamente tipado como um array de Job
   const [jobs, setJobs] = useState<Job[]>([]);
-
-  // O hook de polling agora trabalha com dados tipados
+  const router = useRouter();
   useJobPolling(jobs, setJobs);
 
-  // A função de callback corresponde ao tipo que definimos no JobCreator
   const handleJobCreated = (jobId: string) => {
     const newJob: Job = {
       jobId: jobId,
@@ -25,9 +24,9 @@ export default function DashboardPage() {
     setJobs(prevJobs => [newJob, ...prevJobs]);
   };
 
-  // NOTA: A lógica de logout será adicionada quando refatorarmos a autenticação
   const handleLogout = () => {
-    alert("Logout a ser implementado!");
+    logout();
+    router.push('/login');
   };
 
   return (
