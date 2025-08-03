@@ -39,10 +39,10 @@ Version: "1.0"
         }
         ```
 
-  * `[ ]` **3. Migrar Componentes Iniciais**
+  * `[x]` **3. Migrar Componentes Iniciais**
 
-      * `[ ]` Copiar a pasta de componentes do projeto antigo.
-      * `[ ]` Renomear todos os arquivos de `.jsx` para `.tsx`.
+      * `[x]` Copiar a pasta de componentes do projeto antigo.
+      * `[x]` Renomear todos os arquivos de `.jsx` para `.tsx`.
 
 #### **Fase 1: Estrutura de Rotas e UI com Tipagem**
 
