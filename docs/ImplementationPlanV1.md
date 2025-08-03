@@ -1,24 +1,24 @@
 ---
 status: permanent
-tags: 
+tags:
 date: 2025-08-02
-project: 
+project:
 related: "[[Project Next e Typescript]]"
-prompt: 
+prompt:
 Version: "1.0"
 ---
 ### **Checklist de Migração para Next.js com TypeScript**
 
 #### **Fase 0: Configuração e Base do Projeto**
 
-  * `[ ]` **1. Inicializar o Projeto com TypeScript**
+  * `[x]` **1. Inicializar o Projeto com TypeScript**
 
-      * `[ ]` Executar o comando `npx create-next-app@latest`.
-      * `[ ]` Responder `Yes` para a pergunta sobre o uso de TypeScript na inicialização.
+      * `[x` Executar o comando `npx create-next-app@latest`.
+      * `[x]` Responder `Yes` para a pergunta sobre o uso de TypeScript na inicialização.
 
-  * `[ ]` **2. Definir Tipos Compartilhados**
+  * `[x]` **2. Definir Tipos Compartilhados**
 
-      * `[ ]` Criar o arquivo `types/index.ts` com as interfaces `Job` e `Segment`.
+      * `[x]` Criar o arquivo `types/index.ts` com as interfaces `Job` e `Segment`.
         ```typescript
         // types/index.ts
         export interface Segment {
