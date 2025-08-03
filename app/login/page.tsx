@@ -3,7 +3,6 @@
 "use client"; // 1. Diretiva que marca este como um Componente de Cliente (interativo)
 
 import Spinner from '@/components/Spinner';
-import { login } from '@/services/apiService';
 import Link from 'next/link'; // 2. Importa o Link do Next.js, não do react-router-dom
 import { useState } from 'react';
 
@@ -11,7 +10,6 @@ import { useState } from 'react';
 interface LoginProps {
   onLoginSuccess: () => void;
 }
-
 
 export default function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState('');
@@ -21,17 +19,29 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!username || !password) {
-      setError('Por favor, preencha todos os campos.');
-      return;
-    }
     setIsLoading(true);
     setError('');
     try {
-      await login({ username, password });
-      onLoginSuccess(); // Notifica o App.jsx que o login foi bem-sucedido
-    } catch (err) {
-      setError('Credenciais inválidas. Tente novamente.');
+      // ATUALIZAÇÃO: Usando fetch para chamar nosso próprio endpoint
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Credenciais inválidas');
+      }
+
+      // Se o login for bem-sucedido, a API do Next.js já configurou o cookie.
+      // Apenas notificamos o componente pai para atualizar a UI.
+      onLoginSuccess();
+    } catch (err: any) {
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }

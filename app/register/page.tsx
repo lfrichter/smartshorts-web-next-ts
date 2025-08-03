@@ -1,7 +1,6 @@
 "use client"; // Componente interativo que roda no navegador
 
 import Spinner from '@/components/Spinner';
-import { register } from '@/services/apiService';
 import Link from 'next/link'; // Link do Next.js
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -20,11 +19,25 @@ export default function RegisterPage() {
     setError('');
     setSuccess('');
     try {
-      await register({ username, password });
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Usa a mensagem de erro que vem da nossa API Next.js
+        throw new Error(data.error || 'Falha no registro');
+      }
+
       setSuccess('Usuário criado com sucesso! Redirecionando para o login...');
-      setTimeout(() => router.push('/login'), 2000); // Redireciona para o login após 2s
-    } catch (err) {
-      setError('Usuário já existente ou dados inválidos.');
+      setTimeout(() => router.push('/login'), 2000);
+    } catch (err: any) {
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
