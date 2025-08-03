@@ -46,9 +46,9 @@ Version: "1.0"
 
 #### **Fase 1: Estrutura de Rotas e UI com Tipagem**
 
-  * `[ ]` **1. Configurar o Layout Raiz Tipado (`app/layout.tsx`)**
+  * `[x]` **1. Configurar o Layout Raiz Tipado (`app/layout.tsx`)**
 
-      * `[ ]` Garantir a tipagem correta da prop `children` no `RootLayout`.
+      * `[x]` Garantir a tipagem correta da prop `children` no `RootLayout`.
         ```typescript
         export default function RootLayout({
           children,
@@ -59,11 +59,11 @@ Version: "1.0"
         }
         ```
 
-  * `[ ]` **2. Criar e Tipar as Páginas**
+  * `[x]` **2. Criar e Tipar as Páginas**
 
-      * `[ ]` Criar a estrutura de pastas e arquivos para as rotas (ex: `app/login/page.tsx` e `app/register/page.tsx`).
-      * `[ ]` Adicionar a diretiva `"use client"` no topo dos componentes interativos.
-      * `[ ]` Adicionar a tipagem para as props em todos os componentes migrados (ex: `function JobCreator({ onJobCreated }: { onJobCreated: (jobId: string) => void })`).
+      * `[x]` Criar a estrutura de pastas e arquivos para as rotas (ex: `app/login/page.tsx` e `app/register/page.tsx`).
+      * `[x]` Adicionar a diretiva `"use client"` no topo dos componentes interativos.
+      * `[x]` Adicionar a tipagem para as props em todos os componentes migrados (ex: `function JobCreator({ onJobCreated }: { onJobCreated: (jobId: string) => void })`).
 
 #### **Fase 2: Lógica de Cliente com Tipagem**
 

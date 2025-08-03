@@ -1,17 +1,25 @@
-// src/components/Login.jsx
+// app/login/page.tsx
 
+"use client"; // 1. Diretiva que marca este como um Componente de Cliente (interativo)
+
+import Spinner from '@/components/Spinner';
+import { login } from '@/services/apiService';
+import Link from 'next/link'; // 2. Importa o Link do Next.js, não do react-router-dom
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { login } from '../services/apiService';
-import Spinner from './Spinner';
 
-function Login({ onLoginSuccess }) {
+// 3. Define a interface para as props do componente
+interface LoginProps {
+  onLoginSuccess: () => void;
+}
+
+
+export default function Login({ onLoginSuccess }: LoginProps) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!username || !password) {
       setError('Por favor, preencha todos os campos.');
@@ -88,4 +96,4 @@ function Login({ onLoginSuccess }) {
   );
 }
 
-export default Login;
+

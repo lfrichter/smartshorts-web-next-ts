@@ -1,17 +1,20 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { register } from '../services/apiService';
-import Spinner from './Spinner';
+"use client"; // Componente interativo que roda no navegador
 
-function Register() {
+import Spinner from '@/components/Spinner';
+import { register } from '@/services/apiService';
+import Link from 'next/link'; // Link do Next.js
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const navigate = useNavigate();
+  const router = useRouter(); // 2. Inicializa o router
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setIsLoading(true);
     setError('');
@@ -19,7 +22,7 @@ function Register() {
     try {
       await register({ username, password });
       setSuccess('Usuário criado com sucesso! Redirecionando para o login...');
-      setTimeout(() => navigate('/login'), 2000); // Redireciona para o login após 2s
+      setTimeout(() => router.push('/login'), 2000); // Redireciona para o login após 2s
     } catch (err) {
       setError('Usuário já existente ou dados inválidos.');
     } finally {
@@ -76,5 +79,3 @@ function Register() {
     </div>
   );
 }
-
-export default Register;
